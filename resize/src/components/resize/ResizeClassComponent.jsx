@@ -19,10 +19,19 @@ export class ResizeClassComponent extends React.Component {
       x: 10,
       y: 10
     };
+    this.state2 = {
+      width: 500,
+      height: 200,
+      x: 50,
+      y: 50
+    };
   }
 
   render() {
     return (
+      <div>
+<div>
+
       <Rnd
         style={style}
         size={{ width: this.state.width, height: this.state.height }}
@@ -38,8 +47,29 @@ export class ResizeClassComponent extends React.Component {
           });
         }}
       >
+        rnd
+      </Rnd>
+</div>
+      <div>
+      <Rnd
+        style={style}
+        size={{ width: this.state2.width, height: this.state2.height }}
+        position={{ x: this.state2.x, y: this.state2.y }}
+        onDragStop={(e, d) => {
+          this.setState2({ x: d.x, y: d.y });
+        }}
+        onResizeStop={(e, direction, ref, delta, position) => {
+          this.setState2({
+            width: ref.style.width,
+            height: ref.style.height,
+            ...position
+          });
+        }}
+      >
         Rnd
       </Rnd>
+      </div>
+      </div>
     );
   }
 }
